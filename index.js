@@ -23,7 +23,7 @@ const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 const setting = JSON.parse(fs.readFileSync('./src/settings.json'))
-prefix = setting.prefix
+prefix = '.'
 blocked = []
 
 function kyun(seconds){
@@ -63,21 +63,21 @@ async function starts() {
 			console.log(anu)
 			if (anu.action == 'add') {
 				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${anu.participants[0].split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+				try  {
+					ppimg = 'https://acegif.com/wp-content/uploads/2021/4fh5wi/bemvindo-17.gif'
 				}
-				teks = `Halo @${num.split('@')[0]}\nSelamat datang di group *${mdata.subject}*`
+				teks = `Olá! @${num.split('@')[0]}\nSeja bemvindo/a. 
+        ----   Grupo *${mdata.subject}* -----   
+   
+Comente qual o Seu nome/idade/triade. 
+    *Leia as regras*  
+
+comando .biblioteca sera colocao em breve. `
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			} else if (anu.action == 'remove') {
 				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${num.split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-				}
+		
 				teks = `Sayonara @${num.split('@')[0]}👋`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
@@ -132,7 +132,7 @@ async function starts() {
 			}
 
 			const botNumber = client.user.jid
-			const ownerNumber = [`${setting.ownerNumber}@s.whatsapp.net`] // replace this with your number
+			const ownerNumber = [5511910622412`${setting.ownerNumber}@s.whatsapp.net`] // replace this with your number
 			const isGroup = from.endsWith('@g.us')
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
 			const groupMetadata = isGroup ? await client.groupMetadata(from) : ''
@@ -774,6 +774,7 @@ async function starts() {
 						reply('Gagal om')
 					}
 					break
+			
 				case 'wait':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						reply(mess.wait)
